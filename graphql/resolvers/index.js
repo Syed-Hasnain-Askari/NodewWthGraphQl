@@ -1,4 +1,5 @@
 const courseController = require('../../controller/courses');
+const userController = require('../../controller/auth');
 
 const resolvers = {
 	Query: {
@@ -14,12 +15,15 @@ const resolvers = {
 				topic: args.topic,
 				url: args.url,
 			};
-			// Save the new course to your data store or database
-			// Make sure to handle the insertion logic here
-
-			// After insertion, you can return the updated list of courses
-			// Call the insertCourse function from your controller to insert data into MongoDB
 			const result = await courseController.insertCourse(newCourse);
+			return result;
+		},
+		signUp: async (_, args) => {
+			const user = {
+				email: args.email,
+				password: args.password,
+			};
+			const result = await userController.signUp(user);
 			return result;
 		},
 	},
