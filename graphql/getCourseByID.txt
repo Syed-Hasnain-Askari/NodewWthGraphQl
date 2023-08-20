@@ -1,0 +1,9 @@
+query getCourseById($id: Int!) {
+  course(id: $id) {
+    title
+    author
+    description
+    topic
+    url
+  }
+}
