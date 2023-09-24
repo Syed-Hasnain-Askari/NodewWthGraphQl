@@ -1,15 +1,23 @@
 const CourseModel = require('../models/course');
-
+const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Types;
 // Get a course by ID
 const getCourseById = async (id) => {
 	try {
-		const course = await CourseModel.findOne({ id });
+	  if (!ObjectId.isValid(id)) {
+		return null;
+	  }
+	  const course = await CourseModel.findById(id);
+	  if (course) {
 		return course;
+	  } else {
+		console.log("Course not found");
+		return null; // Return null or throw an error as needed
+	  }
 	} catch (error) {
-		throw error;
+	  throw error;
 	}
-};
-
+  };
 // Get courses by topic
 const getCoursesByTopic = async (topic) => {
 	try {

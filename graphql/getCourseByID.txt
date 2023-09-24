@@ -1,9 +1,9 @@
-query getCourseById($id: Int!) {
-  course(id: $id) {
-    title
-    author
-    description
-    topic
-    url
+  query getCourseById($id: String!) {
+    course(id: $id) {
+      title
+      author
+      description
+      topic
+      url
+    }
   }
-}

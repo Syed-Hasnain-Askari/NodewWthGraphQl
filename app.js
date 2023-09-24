@@ -29,11 +29,4 @@ app.use((req, res, next) => {
 	res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
 	next();
 });
-// These all are endpoint
-
-// for products
-app.get('/', (req, res, next) => {
-	res.send('Hellow world');
-});
-
 module.exports = app;

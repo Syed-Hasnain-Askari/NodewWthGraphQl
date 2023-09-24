@@ -1,10 +1,10 @@
 const courseController = require('../../controller/courses');
 const userController = require('../../controller/auth');
-
 const resolvers = {
 	Query: {
 		course: (_, args) => courseController.getCourseById(args.id),
 		courses: (_, args) => courseController.getCoursesByTopic(args.topic),
+		login: (_, args) => userController.login(args.email,args.password)
 	},
 	Mutation: {
 		insertCourse: async (_, args) => {
@@ -24,9 +24,8 @@ const resolvers = {
 				password: args.password,
 			};
 			const result = await userController.signUp(user);
-			return result;
+			return result
 		},
 	},
 };
-
 module.exports = { resolvers };
