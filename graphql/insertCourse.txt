@@ -1,0 +1,10 @@
+mutation InsertCourse($id: Int!, $title: String!, $author: String!, $description: String!, $topic: String!, $url: String!) {
+    insertCourse(id: $id, title: $title, author: $author, description: $description, topic: $topic, url: $url) {
+      id
+      title
+      author
+      description
+      topic
+      url
+    }
+  }
