@@ -6,7 +6,7 @@ const { graphqlHTTP } = require('express-graphql');
 const { makeExecutableSchema } = require('@graphql-tools/schema');
 const { typeDefs } = require('./graphql/schema/index');
 const { resolvers } = require('./graphql/resolvers/index');
-
+const isAuth = require('./middleware/is-auth')
 const app = express();
 const port = process.env.PORT || 3977;
 // MongoDB setup
@@ -21,6 +21,8 @@ const executableSchema = makeExecutableSchema({
 	typeDefs,
 	resolvers,
 });
+//middleware
+app.use(isAuth)
 // Entrypoint
 app.use(
 	'/graphql',

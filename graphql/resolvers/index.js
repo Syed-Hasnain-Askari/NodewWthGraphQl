@@ -3,7 +3,14 @@ const userController = require('../../controller/auth');
 const resolvers = {
 	Query: {
 		course: (_, args) => courseController.getCourseById(args.id),
-		courses: (_, args) => courseController.getCoursesByTopic(args.topic),
+		courses: (_, args,req) => {
+			if(!req.isAuth){
+				throw new Error("Unauthorized")
+		   }
+		   else{
+			   return courseController.getCoursesByTopic(args.topic)
+		   }
+		},
 		login: (_, args) => userController.login(args.email,args.password)
 	},
 	Mutation: {
