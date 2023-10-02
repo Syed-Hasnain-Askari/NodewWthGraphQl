@@ -23,6 +23,8 @@ const typeDefs = `
   }
   type Mutation {
     insertCourse(id: Int, title: String, author: String, description: String, topic: String, url: String): Course
+    updateCourse(id: String, title: String, author: String, description: String, topic: String, url: String): Course
+    deleteCourse(id: String): String
     signUp(email:String!,password:String!):User
   }
 

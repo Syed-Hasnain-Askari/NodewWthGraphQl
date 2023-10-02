@@ -23,12 +23,10 @@ const signUp = async ({ email, password }) => {
 const login = async (email, password) => {
 	try {
 		const result = await UserModal.findOne({email:email})
-		console.log(result,"RESult")
 		if (!result) {
 			throw new Error("Invalid email or password")
 		}
 		const isEqual = await bcrypt.compare(password,result.password)
-		console.log(isEqual,"IsEQAUl")
 		if(!isEqual){
 			throw new Error("Invalid password")
 		}

@@ -11,13 +11,27 @@ const getCourseById = async (id) => {
 	  if (course) {
 		return course;
 	  } else {
-		console.log("Course not found");
-		return null; // Return null or throw an error as needed
+		throw new  Error("Invalid course Id")
 	  }
 	} catch (error) {
 	  throw error;
 	}
   };
+const updateCourseById = async (id,courses) => {
+	try{
+		const result = CourseModel.findByIdAndUpdate(id,courses,{new:true})
+		if(!result){
+			throw new  Error("Invalid course Id")
+		}
+		else{
+			return result
+		}
+
+	}
+	catch(error){
+		throw error
+	}
+}
 // Get courses by topic
 const getCoursesByTopic = async (topic) => {
 	try {
@@ -40,6 +54,7 @@ const insertCourse = async (courseData) => {
 };
 module.exports = {
 	getCourseById,
+	updateCourseById,
 	getCoursesByTopic,
 	insertCourse,
 };

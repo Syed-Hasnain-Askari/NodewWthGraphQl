@@ -25,6 +25,17 @@ const resolvers = {
 			const result = await courseController.insertCourse(newCourse);
 			return result;
 		},
+		updateCourse: async (_, args) => {
+			const newCourse = {
+				title: args.title,
+				author: args.author,
+				description: args.description,
+				topic: args.topic,
+				url: args.url,
+			};
+			const result = await courseController.updateCourseById(args.id,newCourse);
+			return result;
+		},
 		signUp: async (_, args) => {
 			const user = {
 				email: args.email,
