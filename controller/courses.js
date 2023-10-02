@@ -32,6 +32,22 @@ const updateCourseById = async (id,courses) => {
 		throw error
 	}
 }
+const deleteCourseById = async (id) => {
+	try{
+		const result = await CourseModel.findByIdAndDelete(id)
+		console.log(result,"result-===========>")
+		if(!result){
+			throw new  Error("Invalid course Id")
+		}
+		else{
+			return result
+		}
+
+	}
+	catch(error){
+		throw error
+	}
+}
 // Get courses by topic
 const getCoursesByTopic = async (topic) => {
 	try {
@@ -54,6 +70,7 @@ const insertCourse = async (courseData) => {
 };
 module.exports = {
 	getCourseById,
+	deleteCourseById,
 	updateCourseById,
 	getCoursesByTopic,
 	insertCourse,

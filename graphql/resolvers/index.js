@@ -36,6 +36,10 @@ const resolvers = {
 			const result = await courseController.updateCourseById(args.id,newCourse);
 			return result;
 		},
+		deleteCourse: async (_, args) => {
+			courseController.deleteCourseById(args.id);
+			return "Course has been deleted";
+		},
 		signUp: async (_, args) => {
 			const user = {
 				email: args.email,

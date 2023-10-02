@@ -22,7 +22,7 @@ const typeDefs = `
     login(email:String!,password:String!): authData
   }
   type Mutation {
-    insertCourse(id: Int, title: String, author: String, description: String, topic: String, url: String): Course
+    insertCourse(title: String, author: String, description: String, topic: String, url: String): Course
     updateCourse(id: String, title: String, author: String, description: String, topic: String, url: String): Course
     deleteCourse(id: String): String
     signUp(email:String!,password:String!):User
