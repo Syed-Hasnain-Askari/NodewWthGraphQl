@@ -13,7 +13,7 @@ import Container from '@mui/material/Container';
 import axios from 'axios'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Swal from 'sweetalert2';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -26,9 +26,6 @@ function Copyright(props) {
     </Typography>
   );
 }
-
-// TODO remove, this demo shouldn't need to reset the theme.
-
 const defaultTheme = createTheme();
 export default function SignIn() {
     const [inputFields,setInputFields] = useState({
@@ -45,40 +42,36 @@ export default function SignIn() {
       event.preventDefault();
       const requestBody = {
         query: `
-          query {
-            login(email: "${inputFields.email}", password: "${inputFields.password}") {
-              userId
-              token
+          mutation {
+            signUp(email: "${inputFields.email}", password: "${inputFields.password}") {
+              email
+              password
             }
           }
         `
-      };
-    
+      };   
       try {
         const response = await axios.post('http://localhost:3977/graphql', requestBody);
-        console.log(response,"response")
-        const {data,errors} = response;
-        if(data?.data?.login!=null){
+        console.log(response,"Response")
+        const {data} = response;
+        if(data?.data?.signUp!=null){
           Swal.fire(
             'Good job!',
-            'Login has been successful',
+            'SignUp has been successful',
             'success'
           )
         }
         else{
           Swal.fire(
             'Oops!',
-            'Invalid email or password',
+            'Something went wrong',
             'error'
           )
         }
       } catch (err) {
         console.log(err);
-        // Handle errors here
       }
     };
-    
-    
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
@@ -95,7 +88,7 @@ export default function SignIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Sign Up
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -133,7 +126,7 @@ export default function SignIn() {
               sx={{ mt: 3, mb: 2 }}
               onClick={handleSubmit}
             >
-              Sign In
+              Sign Up
             </Button>
             <Grid container>
               <Grid item xs>
@@ -142,8 +135,8 @@ export default function SignIn() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link to={'/signup'} variant="body2">
-                  {"Don't have an account? Sign Up"}
+                <Link to={'/signin'} variant="body2">
+                  {"Already have an account? Sign In"}
                 </Link>
               </Grid>
             </Grid>

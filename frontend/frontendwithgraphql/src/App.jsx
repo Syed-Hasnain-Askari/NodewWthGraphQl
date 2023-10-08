@@ -1,9 +1,9 @@
-import React,{useState} from 'react'
-import SignIn from './pages/SignIn'
+import React from 'react'
+import Navigation from './Navigation'
 function App() {
   return (
     <>
-      <SignIn/>
+      <Navigation/>
     </>
   )
 }
