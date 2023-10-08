@@ -53,7 +53,6 @@ export default function SignIn() {
           }
         `
       };
-    
       try {
         const response = await axios.post('http://localhost:3977/graphql', requestBody);
         console.log(response,"response")
