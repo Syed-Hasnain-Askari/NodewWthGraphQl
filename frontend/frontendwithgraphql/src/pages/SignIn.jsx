@@ -31,6 +31,7 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 export default function SignIn() {
+  const navigate = useNavigate()
     const [inputFields,setInputFields] = useState({
         email:'',
         password:''
@@ -58,18 +59,22 @@ export default function SignIn() {
         console.log(response,"response")
         const {data,errors} = response;
         if(data?.data?.login!=null){
+          localStorage.setItem("users",JSON.stringify(data?.data?.login))
           Swal.fire(
             'Good job!',
             'Login has been successful',
             'success'
           )
+          navigate('/')
         }
         else{
-          Swal.fire(
-            'Oops!',
-            'Invalid email or password',
-            'error'
-          )
+          if(errors !== null){
+            Swal.fire(
+              'Oops!',
+              'Invalid email or password',
+              'error'
+            )
+          }   
         }
       } catch (err) {
         console.log(err);

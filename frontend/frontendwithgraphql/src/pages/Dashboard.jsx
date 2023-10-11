@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../component/Navbar'
-import CourseRegistation from '../component/AddCourse'
+import CourseRegistation from './AddCourse'
+import CourseList from '../component/CourseList'
 export default function Dashboard() {
   return (
-    <div><Navbar/>
-    <CourseRegistation/>
+    <div>
+    <Navbar/>
+    <CourseList/>
     </div>
   )
 }
