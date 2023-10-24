@@ -12,9 +12,8 @@ const signUp = async ({ email, password }) => {
 		email: email,
 		password: hashPassword,
 	  });
-  
 	  const savedUser = await user.save();
-	  return savedUser; // Return the saved user object
+	  return savedUser;
 	} catch (error) {
 	  throw error;
 	}
@@ -28,7 +27,7 @@ const login = async (email, password) => {
 		}
 		const isEqual = await bcrypt.compare(password,result.password)
 		if(!isEqual){
-			throw new Error("Invalid password")
+			throw new Error("Invalid email or password")
 		}
 		const token = jwt.sign({userId:result._id,email:result.email},'secretkey',{
 			expiresIn: '1h',

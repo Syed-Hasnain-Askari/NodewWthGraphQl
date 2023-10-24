@@ -1,4 +1,4 @@
-import react,{useState,useEffect} from 'react';
+import react, { useState, useEffect } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -46,7 +46,7 @@ export default function CourseList(props) {
     }
   };
   const handleDelete = (event) => {
-    console.log(event,"Id")
+    console.log(event, "Id")
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -58,33 +58,33 @@ export default function CourseList(props) {
     }).then((result) => {
       if (result.isConfirmed) {
         const requestBody = {
-        query: `
+          query: `
         mutation {
           deleteCourse(id:"${event.id}")
         }
       `
-      }
-      try{
-          const response = axios.post('http://localhost:3977/graphql',requestBody);
-          console.log(response,"response")
+        }
+        try {
+          const response = axios.post('http://localhost:3977/graphql', requestBody);
+          console.log(response, "response")
           if (response) {
-              getCourses()
-              Swal.fire(
-                  'Good job!',
-                  'Course has been deleted successfully',
-                  'success'
-                )
-            } else {
-              Swal.fire(
-                  'Error',
-                  'Course has not been inserted',
-                  'error'
-                )
-            }       
-      }
-      catch(err){
+            getCourses()
+            Swal.fire(
+              'Good job!',
+              'Course has been deleted successfully',
+              'success'
+            )
+          } else {
+            Swal.fire(
+              'Error',
+              'Course has not been inserted',
+              'error'
+            )
+          }
+        }
+        catch (err) {
           console.log(err)
-      }
+        }
       }
     })
   }
@@ -92,44 +92,44 @@ export default function CourseList(props) {
     getCourses();
   }, []);
   const data = courseList?.data?.getCourses;
-    return (
+  return (
     <Container maxWidth='lg'>
       <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Id</TableCell>
-            <TableCell>Title</TableCell>
-            <TableCell>Author</TableCell>
-            <TableCell>Description</TableCell>
-            <TableCell>topic</TableCell>
-            <TableCell>Action</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-        {data?.map((item, index) => (
-  <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-    <TableCell component="th" scope="row">
-      {item.id}
-    </TableCell>
-    <TableCell component="th" scope="row">
-      {item.title}
-    </TableCell>
-    <TableCell>{item.author}
-    </TableCell>
-    <TableCell>{item.description}
-    </TableCell>
-    <TableCell>{item.topic}
-    </TableCell>
-    <TableCell>
-      <span><EditIcon onClick={()=>navigate(`/editcourse/${item.id}`)}/></span>
-      <span><DeleteIcon onClick={(e)=>handleDelete(item)}/></span>
-    </TableCell>
-  </TableRow>
-))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Id</TableCell>
+              <TableCell>Title</TableCell>
+              <TableCell>Author</TableCell>
+              <TableCell>Description</TableCell>
+              <TableCell>topic</TableCell>
+              <TableCell>Action</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data?.map((item, index) => (
+              <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                <TableCell component="th" scope="row">
+                  {item.id}
+                </TableCell>
+                <TableCell component="th" scope="row">
+                  {item.title}
+                </TableCell>
+                <TableCell>{item.author}
+                </TableCell>
+                <TableCell>{item.description}
+                </TableCell>
+                <TableCell>{item.topic}
+                </TableCell>
+                <TableCell>
+                  <span><EditIcon onClick={() => navigate(`/editcourse/${item.id}`)} /></span>
+                  <span><DeleteIcon onClick={(e) => handleDelete(item)} /></span>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </Container>
   );
 }

@@ -1,6 +1,20 @@
 const CourseModel = require('../models/course');
 const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Types;
+//GET All courses
+const getAllCourses = async () => {
+	try {
+	  const courses = await CourseModel.find()
+	  if (courses.length > 0) {
+		return courses;
+	  } else {
+		throw new Error("No courses found");
+	  }
+	} catch (error) {
+	  throw error;
+	}
+  };
+  
 // Get a course by ID
 const getCourseById = async (id) => {
 	try {
@@ -63,12 +77,13 @@ const insertCourse = async (courseData) => {
 	try {
 		const newCourse = new CourseModel(courseData);
 		const savedCourse = await newCourse.save();
-		return savedCourse;
+		return savedCourse
 	} catch (error) {
 		throw error;
 	}
 };
 module.exports = {
+	getAllCourses,
 	getCourseById,
 	deleteCourseById,
 	updateCourseById,

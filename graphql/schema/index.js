@@ -18,7 +18,8 @@ const typeDefs = `
   }
   type Query {
     course(id: String!): Course
-    courses(topic: String): [Course]
+    getCourseByTopic(topic: String): [Course]
+    getCourses:[Course]
     login(email:String!,password:String!): authData
   }
   type Mutation {
