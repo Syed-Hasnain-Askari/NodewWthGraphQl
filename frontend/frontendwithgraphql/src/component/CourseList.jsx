@@ -93,9 +93,9 @@ export default function CourseList(props) {
   }, []);
   const data = courseList?.data?.getCourses;
   return (
-    <Container maxWidth='lg'>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <TableContainer sx={{ maxHeight: 565 }} component={Paper}>
+        <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
               <TableCell>Id</TableCell>
@@ -130,6 +130,6 @@ export default function CourseList(props) {
           </TableBody>
         </Table>
       </TableContainer>
-    </Container>
+    </Paper>
   );
 }
